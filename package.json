@@ -1,0 +1,11 @@
+{
+    "name": "ShingShang",
+    "description": "An ancient game modernised through node",
+  	"author": "Chris Hughes",
+  	"version": "0.0.1",
+  	"private": true,
+  	"dependencies": {
+	  "express": "2.5.8"
+	, "jade": ">= 0.0.1"
+  }
+}
