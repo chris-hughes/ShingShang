@@ -6,3 +6,56 @@ body {
 a {
   color: #00B7FF;
 }
+
+/* board styles */
+
+.board{
+	font-size:150%;
+	font-family:sans-serif;
+}
+
+.row{
+	clear:left;
+}
+.row div{
+	width:2em;
+	height:2em;
+	line-height:2em;
+	text-align:center;
+	background-color:#aaa;
+	border:1px solid #ccc;
+	float:left;
+}
+
+.row div.blank{
+	background-color:#f5f5f5;
+	border:1px solid #f5f5f5;
+}
+.row div.target{
+	background-color:#000000;
+}
+.row div.selected{
+	background-color:#ffff00;
+	border:1px solid #ccc;
+}
+
+/* counter styles */
+
+.row div.redDragon{
+	background-color:#aa0000;
+}
+.row div.GreenDragon{
+	background-color:#00aa00;
+}
+.row div.redBear{
+	background-color:#dd0000;
+}
+.row div.GreenBear{
+	background-color:#00dd00;
+}
+.row div.redMonkey{
+	background-color:#ff0000;
+}
+.row div.GreenMonkey{
+	background-color:#00ff00;
+}
