@@ -122,8 +122,8 @@ $('.row div').on('click', function(){
 )
 
 
-// render the initial board
-render();
+// render the initial board when the dom is ready
+$(render);
 
 // function to check if a piece was jumped
 function jumped(startx,starty,newx,newy,piece){
