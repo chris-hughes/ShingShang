@@ -1,9 +1,6 @@
  $(document).ready(function() {
 
-	// hide the end turn button to begin with
-
 	console.log("application.js injected");
-	$('#endturn').hide();
 
 	// a little helper function that lets you select an element at x,y (start at 0,0)
 	// (watch out for the non-middle rows - x will always be "along from the left")
@@ -275,7 +272,7 @@
 			}
 			else if (pieces[jumpPiece].colour===piece.colour){
 				console.log('you jumped a friend');
-				$('button').show();
+				$('#endturn').show();
 				lastMoveJump=1;
 				lastPiece=movePiece;
 				return true;
@@ -286,7 +283,7 @@
 					shingShang=1;
 				}
 				console.log('you captured an enemey '+pieces[jumpPiece].type);
-				$('button').show();
+				$('#endturn').show();
 				lastMoveJump=1;
 				if (jumpPiece<movePiece){
 					lastPiece=movePiece-1;
@@ -316,7 +313,7 @@
 			}
 			else if (pieces[jumpPiece].colour===piece.colour){
 				console.log('you jumped a friend');
-				$('button').show();
+				$('#endturn').show();
 				lastMoveJump=1;
 				lastPiece=movePiece;
 				return true;
@@ -327,7 +324,7 @@
 					shingShang=1;
 				}
 				console.log('you captured an enemey '+pieces[jumpPiece].type);
-				$('button').show();
+				$('#endturn').show();
 				lastMoveJump=1;
 				if (jumpPiece<movePiece){
 					lastPiece=movePiece-1;
@@ -359,7 +356,7 @@
 			}
 			else if (pieces[jumpPiece].colour===piece.colour){
 				console.log('you jumped a friend');
-				$('button').show();
+				$('#endturn').show();
 				lastMoveJump=1;
 				lastPiece=movePiece;
 				return true;
@@ -370,7 +367,7 @@
 					shingShang=1;
 				}
 				console.log('you captured an enemey '+pieces[jumpPiece].type);
-				$('button').show();
+				$('#endturn').show();
 				lastMoveJump=1;
 				if (jumpPiece<movePiece){
 					lastPiece=movePiece-1;
@@ -518,7 +515,7 @@
 	}
 
 	function end(){
-		$('button').hide();
+		$('#endturn').hide();
 		if (shingShang===1){
 			console.log(pieces[lastPiece].colour+' gets another turn');
 			lastMoveJump=0;
@@ -531,6 +528,7 @@
 			turn++;
 		}
 	}
+	// make end a global function so it can be called outside the document.ready callback
 	window.end = end;
 
 });
