@@ -12,6 +12,9 @@ a {
 .board{
 	font-size:150%;
 	font-family:sans-serif;
+	padding-right: 20px;
+	float:left;
+	float: left;
 }
 
 .row{
@@ -58,4 +61,22 @@ a {
 }
 .row div.GreenMonkey{
 	background-color:#00ff00;
+}
+
+/* output style */
+
+.output{
+	float: left;
+}
+
+#turn_icon{
+	width:7em;
+	height:2em;
+	line-height:2em;
+	text-align:center;
+	background-color:#ff0000;
+}
+
+#log{
+	padding-top: 20px;
 }

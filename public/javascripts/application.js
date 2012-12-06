@@ -454,11 +454,11 @@
 				movePiece=-1; // this will stop the turn from happening
 				at(startx,starty).removeClass('selected');
 				render();
-				console.log('it is reds turn');
+				console.log("it is red's turn");
 				return;
 		}
 		else if (turn % 2===1 && pieces[movePiece].colour==="Red"){
-				console.log('it is greens turn');
+				console.log("it is green's turn");
 				at(startx,starty).removeClass('selected');
 				render();
 				movePiece=-1; // this will stop the turn from happening
@@ -510,6 +510,11 @@
 			if (lastMoveJump===0){
 				lastPiece=-1;
 				turn++;
+				if (turn % 2===0){
+					$('#turn_icon').css("background-color","#ff0000").text("Red's Turn");
+				} else {
+					$('#turn_icon').css("background-color","#00ff00").text("Green's Turn");
+				}
 			}
 		}
 	}
@@ -526,6 +531,11 @@
 			lastMoveJump=0;
 			lastPiece=-1;
 			turn++;
+			if (turn % 2===0){
+				$('#turn_icon').css("background-color","#ff0000").text("Red's Turn");
+			} else {
+				$('#turn_icon').css("background-color","#00ff00").text("Green's Turn");
+			}
 		}
 	}
 	// make end a global function so it can be called outside the document.ready callback
