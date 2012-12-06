@@ -1,7 +1,5 @@
  $(document).ready(function() {
 
-	console.log("application.js injected");
-
 	// a little helper function that lets you select an element at x,y (start at 0,0)
 	// (watch out for the non-middle rows - x will always be "along from the left")
 	function at(x,y){
@@ -100,10 +98,10 @@
 	var args = []; 
 	$('.row div').on('click', function(){
 		if (gameOver===1){
-			console.log('Games over - Green won');	
+			$('#log').text('Game over - Green won')
 		}
 		else if (gameOver===2){
-			console.log('Games over - Red won');	
+			$('#log').text('Game over - Red won');	
 		}
 		else {
 	 		args.push($(this).parent().index());
@@ -227,13 +225,13 @@
 		if (newx<0 || newx>9 || newy<0 || newy>9){
 			at(startx,starty).removeClass('selected');
 			render();
-			console.log('Can not move piece off the board');
+			$('#log').text('Can not move piece off the board');
 			return false;
 		}
 		if ((newx<4 || newx>5) && (newy<1 || newy>8)){
 			at(startx,starty).removeClass('selected');
 			render();
-			console.log('Can not move piece off the board');
+			$('#log').text('Can not move piece off the board');
 			return false;
 		}
 
@@ -241,13 +239,13 @@
 		if (Math.abs(newx-startx)>2 || Math.abs(newy-starty)>2){
 			at(startx,starty).removeClass('selected');
 			render();
-			console.log(piece.type+'s do not move like that');
+			$('#log').text(piece.type+'s do not move like that');
 			return false;
 		}
 		else if (!(Math.abs(newx-startx)+Math.abs(newy-starty)===1 || Math.abs(newx-startx)+Math.abs(newy-starty)===2 || Math.abs(newx-startx)+Math.abs(newy-starty)===4)) {
 			at(startx,starty).removeClass('selected');
 			render();
-			console.log(piece.type+'s do not move like that');
+			$('#log').text(piece.type+'s do not move like that');
 			return false;
 		}
 
@@ -259,19 +257,19 @@
 		// now check individual pieces
 		if (piece.type==='dragon'){
 			if (jumpPiece===-1 && lastMoveJump===1){
-				console.log('you must jump again or end turn');
+				$('#log').text('you must jump again or end turn');
 				return;
 			}
 			else if (jumpPiece===-1) {
-				console.log('dragons do not move that way');
+				$('#log').text('dragons do not move that way');
 				return false;
 			}
 			else if (pieces[jumpPiece].heirarchy>piece.heirarchy){
-				console.log(piece.type +'s can not jump '+pieces[jumpPiece].type+'s');
+				$('#log').text(piece.type +'s can not jump '+pieces[jumpPiece].type+'s');
 				return false;
 			}
 			else if (pieces[jumpPiece].colour===piece.colour){
-				console.log('you jumped a friend');
+				$('#log').text('you jumped a friend');
 				$('#endturn').show();
 				lastMoveJump=1;
 				lastPiece=movePiece;
@@ -279,10 +277,10 @@
 			}
 			else {
 				if (lastMoveJump===1){
-					console.log('Shing-Shang bitch!');
+					$('#log').text('Shing-Shang bitch!');
 					shingShang=1;
 				}
-				console.log('you captured an enemey '+pieces[jumpPiece].type);
+				$('#log').text('you captured an enemey '+pieces[jumpPiece].type);
 				$('#endturn').show();
 				lastMoveJump=1;
 				if (jumpPiece<movePiece){
@@ -299,7 +297,7 @@
 
 		else if (piece.type==='bear'){
 			if (jumpPiece===-1 && lastMoveJump===1){
-				console.log('you must jump again or end turn');
+				$('#log').text('you must jump again or end turn');
 				return;
 			}
 			else if (jumpPiece===-1){
@@ -308,11 +306,11 @@
 				}
 			}
 			else if (pieces[jumpPiece].heirarchy>piece.heirarchy){
-				console.log(piece.type +'s can not jump '+pieces[jumpPiece].type+'s');
+				$('#log').text(piece.type +'s can not jump '+pieces[jumpPiece].type+'s');
 				return false;
 			}
 			else if (pieces[jumpPiece].colour===piece.colour){
-				console.log('you jumped a friend');
+				$('#log').text('you jumped a friend');
 				$('#endturn').show();
 				lastMoveJump=1;
 				lastPiece=movePiece;
@@ -320,10 +318,10 @@
 			}
 			else {
 				if (lastMoveJump===1){
-					console.log('Shing-Shang bitch!');
+					$('#log').text('Shing-Shang bitch!');
 					shingShang=1;
 				}
-				console.log('you captured an enemey '+pieces[jumpPiece].type);
+				$('#log').text('you captured an enemey '+pieces[jumpPiece].type);
 				$('#endturn').show();
 				lastMoveJump=1;
 				if (jumpPiece<movePiece){
@@ -342,7 +340,7 @@
 			if (jumpPiece===-1 && lastMoveJump===1){
 				at(startx,starty).removeClass('selected');
 				render();
-				console.log('you must jump again or end turn');
+				$('#log').text('you must jump again or end turn');
 				return;
 			}
 			else if (jumpPiece===-1 && lastMoveJump===0){
@@ -351,11 +349,11 @@
 			else if (pieces[jumpPiece].heirarchy>piece.heirarchy){
 				at(startx,starty).removeClass('selected');
 				render();
-				console.log(piece.type +'s can not jump '+pieces[jumpPiece].type+'s');
+				$('#log').text(piece.type +'s can not jump '+pieces[jumpPiece].type+'s');
 				return false;
 			}
 			else if (pieces[jumpPiece].colour===piece.colour){
-				console.log('you jumped a friend');
+				$('#log').text('you jumped a friend');
 				$('#endturn').show();
 				lastMoveJump=1;
 				lastPiece=movePiece;
@@ -363,10 +361,10 @@
 			}
 			else {
 				if (lastMoveJump===1){
-					console.log('Shing-Shang bitch!');
+					$('#log').text('Shing-Shang bitch!');
 					shingShang=1;
 				}
-				console.log('you captured an enemey '+pieces[jumpPiece].type);
+				$('#log').text('you captured an enemey '+pieces[jumpPiece].type);
 				$('#endturn').show();
 				lastMoveJump=1;
 				if (jumpPiece<movePiece){
@@ -389,12 +387,12 @@
 		var greenDragonCount=0;
 		for (i=0;i<pieces.length;i++){
 			if (pieces[i].colour==='Green' && pieces[i].type==='dragon' && pieces[i].x===8 && (pieces[i].y===4 || pieces[i].y===5)) {
-					console.log('Green wins!!! Sucks to be red');
+					$('#log').text('Green wins!!! Sucks to be red');
 					gameOver=1;
 					return;
 			}
 			else if (pieces[i].colour==='Red' && pieces[i].type==='dragon' && pieces[i].x===1 && (pieces[i].y===4 || pieces[i].y===5)) {
-					console.log('Red wins!!! Sucks to be green');
+					$('#log').text('Red wins!!! Sucks to be green');
 					gameOver=2;
 					return;
 			}
@@ -407,12 +405,12 @@
 		}
 
 		if (redDragonCount===0){
-			console.log('Green wins!!! Sucks to be red');
+			$('#log').text('Green wins!!! Sucks to be red');
 			gameOver=1;
 			return;
 		}
 		else if (greenDragonCount===0){
-			console.log('Red wins!!! Sucks to be green');
+			$('#log').text('Red wins!!! Sucks to be green');
 			gameOver=2;
 			return;
 		}
@@ -439,7 +437,7 @@
 			if (lastPiece!==movePiece){
 				at(startx,starty).removeClass('selected');
 				render();
-				console.log('must move the same piece or end turn')
+				$('#log').text('must move the same piece or end turn')
 				return;
 			}
 		}
@@ -447,18 +445,18 @@
 		if (movePiece<0){
 			at(startx,starty).removeClass('selected');
 			render();
-			console.log("No piece to move in starting cell");
+			$('#log').text("No piece to move in starting cell");
 			return;
 		}
 		else if (turn % 2===0 && pieces[movePiece].colour==="Green"){
 				movePiece=-1; // this will stop the turn from happening
 				at(startx,starty).removeClass('selected');
 				render();
-				console.log("it is red's turn");
+				$('#log').text("it is red's turn");
 				return;
 		}
 		else if (turn % 2===1 && pieces[movePiece].colour==="Red"){
-				console.log("it is green's turn");
+				$('#log').text("it is green's turn");
 				at(startx,starty).removeClass('selected');
 				render();
 				movePiece=-1; // this will stop the turn from happening
@@ -476,7 +474,7 @@
 		if (allowMove>-1){
 			at(startx,starty).removeClass('selected');
 			render();
-			console.log("Piece already in target cell");
+			$('#log').text("Piece already in target cell");
 			return;
 		}
 
@@ -522,7 +520,7 @@
 	function end(){
 		$('#endturn').hide();
 		if (shingShang===1){
-			console.log(pieces[lastPiece].colour+' gets another turn');
+			$('#log').text(pieces[lastPiece].colour+' gets another turn');
 			lastMoveJump=0;
 			lastPiece=-1
 			shingShang=0;;
