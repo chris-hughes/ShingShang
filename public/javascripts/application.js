@@ -508,6 +508,7 @@
 			if (lastMoveJump===0){
 				lastPiece=-1;
 				turn++;
+				$('#log').text(" ");
 				if (turn % 2===0){
 					$('#turn_icon').css("background-color","#ff0000").text("Red's Turn");
 				} else {
@@ -529,6 +530,7 @@
 			lastMoveJump=0;
 			lastPiece=-1;
 			turn++;
+			$('#log').text(" ");
 			if (turn % 2===0){
 				$('#turn_icon').css("background-color","#ff0000").text("Red's Turn");
 			} else {

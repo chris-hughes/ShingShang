@@ -1,6 +1,12 @@
 body {
   padding: 20px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: lightblue;
+}
+
+.container{
+	padding-left: 100px;
+	padding-right: 100px;
 }
 
 a {
@@ -14,7 +20,6 @@ a {
 	font-family:sans-serif;
 	padding-right: 20px;
 	float:left;
-	float: left;
 }
 
 .row{
