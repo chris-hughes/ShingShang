@@ -1,1 +1,1 @@
-An ancient game modernised through node
+An ancient game modernised through node and socket.io
