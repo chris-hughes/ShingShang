@@ -111,7 +111,9 @@
 	 			at(args[0],args[1]).addClass('selected');
 	 		}
 	 		if(args.length > 2){
-	  			move.apply(this,args);
+	  			// move.apply(this,args);
+	  			move(args[0],args[1],args[2],args[3]);
+	  			socket.emit('playerMove', args );
 	  			args = [];
 	 		}
 		}
@@ -540,5 +542,6 @@
 	}
 	// make end a global function so it can be called outside the document.ready callback
 	window.end = end;
+	window.move = move;
 
 });
