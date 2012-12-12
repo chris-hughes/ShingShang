@@ -62,26 +62,26 @@
 	function draw(type,x,y,colour){
 		if (type==='dragon'){
 			if (colour==='Red') {
-				at(x,y).text('D').addClass('redDragon');
+				at(x,y).html("<span class='piece'>&#9812;</span>").addClass('redDragon');
 			}
 			else {
-				at(x,y).text('D').addClass('GreenDragon');
+				at(x,y).html("<span class='piece'>&#9818;</span>").addClass('GreenDragon');
 			}
 		}
 		else if (type==='bear'){
 			if (colour==='Red') {
-				at(x,y).text('B').addClass('redBear');
+				at(x,y).html("<span class='piece'>&#9815;</span>").addClass('redBear');
 			}
 			else {
-				at(x,y).text('B').addClass('GreenBear');
+				at(x,y).html("<span class='piece'>&#9821;</span>").addClass('GreenBear');
 			}
 		}
 		else {
 			if (colour==='Red') {
-				at(x,y).text('M').addClass('redMonkey');
+				at(x,y).html("<span class='piece'>&#9817;</span>").addClass('redMonkey');
 			}
 			else {
-				at(x,y).text('M').addClass('GreenMonkey');
+				at(x,y).html("<span class='piece'>&#9823;</span>").addClass('GreenMonkey');
 			}
 		}
 	}
@@ -91,6 +91,9 @@
 		for (i=0;i<pieces.length;i++){
 			draw(pieces[i].type, pieces[i].x ,pieces[i].y, pieces[i].colour);
 		}
+		$('.piece').draggable({
+			'cursor': 'hand',
+		});
 	}
 
 
