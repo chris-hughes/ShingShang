@@ -94,6 +94,17 @@
 		$('.piece').draggable({
 			'cursor': 'hand',
 		});
+
+		$('.board .row div').droppable({
+			accept: '.piece',
+			hoverClass: 'hover',
+			drop: function(event, ui) {
+				var old_square = ui.draggable();
+				var new_square = this;
+
+				// need to get co-ords of the old and new squares and call move(old.x,old.y,new.x,new.y)
+			},
+		});
 	}
 
 
@@ -120,8 +131,7 @@
 	  			args = [];
 	 		}
 		}
-	}
-	)
+	})
 
 
 	// render the initial board
