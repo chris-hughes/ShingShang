@@ -98,34 +98,6 @@
 			});
 		});
 
-		$('.piece').draggable({
-			'cursor': 'hand',
-		});
-
-		$('.board .row div').droppable({
-			accept: '.piece',
-			hoverClass: 'hover',
-			drop: function(event, ui) {
-				var old_square = ui.draggable;
-				var new_square = this;
-				var args = [$(old_square).parent().data('coords').row,$(old_square).parent().data('coords').col,
-					$(new_square).data('coords').row,$(new_square).data('coords').col];
-
-				move(args[0],args[1],args[2],args[3]);
-				socket.emit('playerMove', args );
-
-				console.log(args);
-				
-
-				// need to get co-ords of the old and new squares and call move(old.x,old.y,new.x,new.y)
-			},
-		});
-	}
-
-
-	// jQuery bit to make the game clickable
-	var args = []; 
-	$('.row div').on('click', function(){
 		if (gameOver===1){
 			$('#log').text('Game over - Green won')
 		}
@@ -133,21 +105,28 @@
 			$('#log').text('Game over - Red won');	
 		}
 		else {
-	 		args.push($(this).parent().index());
-	 		args.push($(this).index());
-	 		if (args.length===2){
-	 			at(args[0],args[1]).removeClass('redDragon GreenDragon redBear GreenBear redMonkey GreenMonkey');
-	 			at(args[0],args[1]).addClass('selected');
-	 		}
-	 		if(args.length > 2){
-	  			// move.apply(this,args);
-	  			move(args[0],args[1],args[2],args[3]);
-	  			socket.emit('playerMove', args );
-	  			args = [];
-	 		}
-		}
-	})
 
+			$('.piece').draggable({
+				'cursor': 'hand',
+			});
+
+			$('.board .row div').droppable({
+				accept: '.piece',
+				hoverClass: 'hover',
+				drop: function(event, ui) {
+
+					var old_square = ui.draggable;
+					var new_square = this;
+					var args = [$(old_square).parent().data('coords').row,$(old_square).parent().data('coords').col,
+						$(new_square).data('coords').row,$(new_square).data('coords').col];
+
+					move(args[0],args[1],args[2],args[3]);
+					socket.emit('playerMove', args );
+
+				},
+			});
+		}
+	}
 
 	// render the initial board
 	render();
