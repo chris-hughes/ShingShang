@@ -91,6 +91,13 @@
 		for (i=0;i<pieces.length;i++){
 			draw(pieces[i].type, pieces[i].x ,pieces[i].y, pieces[i].colour);
 		}
+
+		$('.row').each(function(row){
+			$(this).find('> div').each(function(col){
+				$(this).data('coords', {row:row, col:col})
+			});
+		});
+
 		$('.piece').draggable({
 			'cursor': 'hand',
 		});
@@ -99,8 +106,16 @@
 			accept: '.piece',
 			hoverClass: 'hover',
 			drop: function(event, ui) {
-				var old_square = ui.draggable();
+				var old_square = ui.draggable;
 				var new_square = this;
+				var args = [$(old_square).parent().data('coords').row,$(old_square).parent().data('coords').col,
+					$(new_square).data('coords').row,$(new_square).data('coords').col];
+
+				move(args[0],args[1],args[2],args[3]);
+				socket.emit('playerMove', args );
+
+				console.log(args);
+				
 
 				// need to get co-ords of the old and new squares and call move(old.x,old.y,new.x,new.y)
 			},
