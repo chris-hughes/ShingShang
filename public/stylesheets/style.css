@@ -1,12 +1,22 @@
 body {
   padding: 20px;
+  margin: 0 auto;
+  width: 700px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: lightblue;
 }
 
 .container{
-	padding-left: 100px;
-	padding-right: 100px;
+	padding: 10px;
+	padding-bottom: 100px;
+	background-color: whitesmoke;
+	float:left;
+	width: 100%;
+}
+
+h1 {
+	text-align: center;
+	padding-bottom: 10px;
 }
 
 a {
@@ -19,6 +29,8 @@ a {
 	font-size:150%;
 	font-family:sans-serif;
 	padding-right: 20px;
+	padding-left: 20px;
+	width: 65%;
 	float:left;
 }
 
@@ -76,6 +88,7 @@ a {
 
 .output{
 	float: left;
+	width: 25%;
 }
 
 #turn_icon{
