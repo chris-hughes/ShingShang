@@ -108,6 +108,7 @@
 
 			$('.piece').draggable({
 				'cursor': 'hand',
+				containment: ".board"
 			});
 
 			$('.board .row div').droppable({

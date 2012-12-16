@@ -4,8 +4,9 @@ Things to do
 
   Change letters for symbols – check out http://en.wikipedia.org/wiki/Chess_symbols_in_Unicode
 
-·         Make it draggable (using JQuizzle UI) – check out https://github.com/davefowler/chess/
-				Need to finish the endgame so if they've jumped no end turn shows up
+·         Some of the game logic needs attention
+				Make it so only dragons can land on target squares
+				Check what is getting logged is correct (ShingShang biatch isn't logging)
 
 ·         Emit the move only when it is successful (ie. not when the other player is spazzing about)
 
