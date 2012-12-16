@@ -279,7 +279,7 @@
 			}
 			else if (pieces[jumpPiece].colour===piece.colour){
 				$('#log').text('you jumped a friend');
-				$('#endturn').show();
+				// $('#endturn').show();
 				lastMoveJump=1;
 				lastPiece=movePiece;
 				return true;
@@ -290,7 +290,7 @@
 					shingShang=1;
 				}
 				$('#log').text('you captured an enemey '+pieces[jumpPiece].type);
-				$('#endturn').show();
+				// $('#endturn').show();
 				lastMoveJump=1;
 				if (jumpPiece<movePiece){
 					lastPiece=movePiece-1;
@@ -320,7 +320,7 @@
 			}
 			else if (pieces[jumpPiece].colour===piece.colour){
 				$('#log').text('you jumped a friend');
-				$('#endturn').show();
+				// $('#endturn').show();
 				lastMoveJump=1;
 				lastPiece=movePiece;
 				return true;
@@ -331,7 +331,7 @@
 					shingShang=1;
 				}
 				$('#log').text('you captured an enemey '+pieces[jumpPiece].type);
-				$('#endturn').show();
+				// $('#endturn').show();
 				lastMoveJump=1;
 				if (jumpPiece<movePiece){
 					lastPiece=movePiece-1;
@@ -363,7 +363,7 @@
 			}
 			else if (pieces[jumpPiece].colour===piece.colour){
 				$('#log').text('you jumped a friend');
-				$('#endturn').show();
+				// $('#endturn').show();
 				lastMoveJump=1;
 				lastPiece=movePiece;
 				return true;
@@ -374,7 +374,7 @@
 					shingShang=1;
 				}
 				$('#log').text('you captured an enemey '+pieces[jumpPiece].type);
-				$('#endturn').show();
+				// $('#endturn').show();
 				lastMoveJump=1;
 				if (jumpPiece<movePiece){
 					lastPiece=movePiece-1;
@@ -434,6 +434,12 @@
 
 	function move(startx,starty,newx,newy){
 
+		// check if the game is over
+		if (gameOver>0){
+			win();	// this is just an easier way of logging who has won
+			return;
+		}
+
 		// find the piece you are trying to move in the pieces array
 		var movePiece=-1;
 		for (i=0;i<pieces.length;i++){
@@ -458,18 +464,18 @@
 			return;
 		}
 		else if (turn % 2===0 && pieces[movePiece].colour==="Green"){
-				movePiece=-1; // this will stop the turn from happening
-				at(startx,starty).removeClass('selected');
-				render();
-				$('#log').text("it is red's turn");
-				return;
+			movePiece=-1; // this will stop the turn from happening
+			at(startx,starty).removeClass('selected');
+			render();
+			$('#log').text("it is red's turn");
+			return;
 		}
 		else if (turn % 2===1 && pieces[movePiece].colour==="Red"){
-				$('#log').text("it is green's turn");
-				at(startx,starty).removeClass('selected');
-				render();
-				movePiece=-1; // this will stop the turn from happening
-				return;
+			$('#log').text("it is green's turn");
+			at(startx,starty).removeClass('selected');
+			render();
+			movePiece=-1; // this will stop the turn from happening
+			return;
 		}
 
 
@@ -512,6 +518,14 @@
 
 			// check for a winner
 			win();
+			if (gameOver>0){
+				$('#endturn').hide();
+				$('.piece').draggable("disable");
+				return;
+			}
+			else if (gameOver==0 && lastMoveJump==1){
+				$('#endturn').show();
+			}
 
 			// if no jump then end the turn
 			if (lastMoveJump===0){
@@ -547,8 +561,19 @@
 			}
 		}
 	}
+
+	function end_test(){
+		move(7,8,6,8);
+		move(2,8,4,8);
+		move(8,7,7,6);
+		move(1,7,2,7);
+		move(7,6,6,6);
+		move(0,6,1,5);
+	}
+
 	// make end a global function so it can be called outside the document.ready callback
 	window.end = end;
 	window.move = move;
+	window.end_test = end_test;
 
 });
