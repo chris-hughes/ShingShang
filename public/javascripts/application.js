@@ -8,7 +8,7 @@
 
 	// clear the text of all the squares
 	function clear(){
-		$('.board .row div').text('').removeClass('redDragon GreenDragon redBear GreenBear redMonkey GreenMonkey selected')
+		$('.board .row div').text('').removeClass('selected')
 	}
 
 	var Piece = function(type,x,y,colour){
@@ -28,60 +28,60 @@
 	};
 
 
-	// initialise Green pieces
-	var d1Green = new Piece('dragon',0,1,'Green');
-	var d2Green = new Piece('dragon',0,8,'Green');
-	var b1Green = new Piece('bear',0,2,'Green');
-	var b2Green = new Piece('bear',1,1,'Green');
-	var b3Green = new Piece('bear',0,7,'Green');
-	var b4Green = new Piece('bear',1,8,'Green');
-	var m1Green = new Piece('monkey',0,3,'Green');
-	var m2Green = new Piece('monkey',1,2,'Green');
-	var m3Green = new Piece('monkey',2,1,'Green');
-	var m4Green = new Piece('monkey',0,6,'Green');
-	var m5Green = new Piece('monkey',1,7,'Green');
-	var m6Green = new Piece('monkey',2,8,'Green');
+	// initialise black pieces
+	var d1black = new Piece('dragon',0,1,'black');
+	var d2black = new Piece('dragon',0,8,'black');
+	var b1black = new Piece('bear',0,2,'black');
+	var b2black = new Piece('bear',1,1,'black');
+	var b3black = new Piece('bear',0,7,'black');
+	var b4black = new Piece('bear',1,8,'black');
+	var m1black = new Piece('monkey',0,3,'black');
+	var m2black = new Piece('monkey',1,2,'black');
+	var m3black = new Piece('monkey',2,1,'black');
+	var m4black = new Piece('monkey',0,6,'black');
+	var m5black = new Piece('monkey',1,7,'black');
+	var m6black = new Piece('monkey',2,8,'black');
 
-	// initialise red pieces
-	var d1Red = new Piece('dragon',9,1,'Red');
-	var d2Red = new Piece('dragon',9,8,'Red');
-	var b1Red = new Piece('bear',9,2,'Red');
-	var b2Red = new Piece('bear',8,1,'Red');
-	var b3Red = new Piece('bear',9,7,'Red');
-	var b4Red = new Piece('bear',8,8,'Red');
-	var m1Red = new Piece('monkey',9,3,'Red');
-	var m2Red = new Piece('monkey',8,2,'Red');
-	var m3Red = new Piece('monkey',7,1,'Red');
-	var m4Red = new Piece('monkey',9,6,'Red');
-	var m5Red = new Piece('monkey',8,7,'Red');
-	var m6Red = new Piece('monkey',7,8,'Red');
+	// initialise white pieces
+	var d1white = new Piece('dragon',9,1,'white');
+	var d2white = new Piece('dragon',9,8,'white');
+	var b1white = new Piece('bear',9,2,'white');
+	var b2white = new Piece('bear',8,1,'white');
+	var b3white = new Piece('bear',9,7,'white');
+	var b4white = new Piece('bear',8,8,'white');
+	var m1white = new Piece('monkey',9,3,'white');
+	var m2white = new Piece('monkey',8,2,'white');
+	var m3white = new Piece('monkey',7,1,'white');
+	var m4white = new Piece('monkey',9,6,'white');
+	var m5white = new Piece('monkey',8,7,'white');
+	var m6white = new Piece('monkey',7,8,'white');
 
 	// create array of all pieces
-	var pieces = [d1Green,d2Green,b1Green,b2Green,b3Green,b4Green,m1Green,m2Green,m3Green,m4Green,m5Green,m6Green,d1Red,d2Red,b1Red,b2Red,b3Red,b4Red,m1Red,m2Red,m3Red,m4Red,m5Red,m6Red];
+	var pieces = [d1black,d2black,b1black,b2black,b3black,b4black,m1black,m2black,m3black,m4black,m5black,m6black,d1white,d2white,b1white,b2white,b3white,b4white,m1white,m2white,m3white,m4white,m5white,m6white];
 
 	function draw(type,x,y,colour){
 		if (type==='dragon'){
-			if (colour==='Red') {
-				at(x,y).html("<span class='piece'>&#9812;</span>").addClass('redDragon');
+			if (colour==='white') {
+				at(x,y).html("<span class='piece'>&#9812;</span>");
 			}
 			else {
-				at(x,y).html("<span class='piece'>&#9818;</span>").addClass('GreenDragon');
+				at(x,y).html("<span class='piece'>&#9818;</span>");
 			}
 		}
 		else if (type==='bear'){
-			if (colour==='Red') {
-				at(x,y).html("<span class='piece'>&#9815;</span>").addClass('redBear');
+			if (colour==='white') {
+				at(x,y).html("<span class='piece'>&#9815;</span>");
 			}
 			else {
-				at(x,y).html("<span class='piece'>&#9821;</span>").addClass('GreenBear');
+				at(x,y).html("<span class='piece'>&#9821;</span>");
 			}
 		}
 		else {
-			if (colour==='Red') {
-				at(x,y).html("<span class='piece'>&#9817;</span>").addClass('redMonkey');
+			if (colour==='white') {
+				at(x,y).html("<span class='piece'>&#9817;</span>");
 			}
 			else {
-				at(x,y).html("<span class='piece'>&#9823;</span>").addClass('GreenMonkey');
+				at(x,y).html("<span class='piece'>&#9823;</span>");
 			}
 		}
 	}
@@ -99,10 +99,10 @@
 		});
 
 		if (gameOver===1){
-			$('#log').text('Game over - Green won')
+			$('#log').text('Game over - black won')
 		}
 		else if (gameOver===2){
-			$('#log').text('Game over - Red won');	
+			$('#log').text('Game over - white won');	
 		}
 		else {
 
@@ -392,34 +392,34 @@
 
 	// check to see if someone has won
 	function win(movePiece){
-		var redDragonCount=0;
-		var greenDragonCount=0;
+		var whiteDragonCount=0;
+		var blackDragonCount=0;
 		for (i=0;i<pieces.length;i++){
-			if (pieces[i].colour==='Green' && pieces[i].type==='dragon' && pieces[i].x===8 && (pieces[i].y===4 || pieces[i].y===5)) {
-					$('#log').text('Green wins!!! Sucks to be red');
+			if (pieces[i].colour==='black' && pieces[i].type==='dragon' && pieces[i].x===8 && (pieces[i].y===4 || pieces[i].y===5)) {
+					$('#log').text('black wins!!! Sucks to be white');
 					gameOver=1;
 					return;
 			}
-			else if (pieces[i].colour==='Red' && pieces[i].type==='dragon' && pieces[i].x===1 && (pieces[i].y===4 || pieces[i].y===5)) {
-					$('#log').text('Red wins!!! Sucks to be green');
+			else if (pieces[i].colour==='white' && pieces[i].type==='dragon' && pieces[i].x===1 && (pieces[i].y===4 || pieces[i].y===5)) {
+					$('#log').text('white wins!!! Sucks to be black');
 					gameOver=2;
 					return;
 			}
-			if (pieces[i].colour==='Red' && pieces[i].type==='dragon'){
-				redDragonCount++;
+			if (pieces[i].colour==='white' && pieces[i].type==='dragon'){
+				whiteDragonCount++;
 			}
-			else if (pieces[i].colour==='Green' && pieces[i].type==='dragon'){
-				greenDragonCount++;
+			else if (pieces[i].colour==='black' && pieces[i].type==='dragon'){
+				blackDragonCount++;
 			}
 		}
 
-		if (redDragonCount===0){
-			$('#log').text('Green wins!!! Sucks to be red');
+		if (whiteDragonCount===0){
+			$('#log').text('black wins!!! Sucks to be white');
 			gameOver=1;
 			return;
 		}
-		else if (greenDragonCount===0){
-			$('#log').text('Red wins!!! Sucks to be green');
+		else if (blackDragonCount===0){
+			$('#log').text('white wins!!! Sucks to be black');
 			gameOver=2;
 			return;
 		}
@@ -463,15 +463,15 @@
 			$('#log').text("No piece to move in starting cell");
 			return;
 		}
-		else if (turn % 2===0 && pieces[movePiece].colour==="Green"){
+		else if (turn % 2===0 && pieces[movePiece].colour==="black"){
 			movePiece=-1; // this will stop the turn from happening
 			at(startx,starty).removeClass('selected');
 			render();
-			$('#log').text("it is red's turn");
+			$('#log').text("it is white's turn");
 			return;
 		}
-		else if (turn % 2===1 && pieces[movePiece].colour==="Red"){
-			$('#log').text("it is green's turn");
+		else if (turn % 2===1 && pieces[movePiece].colour==="white"){
+			$('#log').text("it is black's turn");
 			at(startx,starty).removeClass('selected');
 			render();
 			movePiece=-1; // this will stop the turn from happening
@@ -533,9 +533,9 @@
 				turn++;
 				$('#log').text(" ");
 				if (turn % 2===0){
-					$('#turn_icon').css("background-color","#ff0000").text("Red's Turn");
+					$('#turn_icon').css('color','white').text("White's Turn");
 				} else {
-					$('#turn_icon').css("background-color","#00ff00").text("Green's Turn");
+					$('#turn_icon').css('color','black').text("Black's Turn");
 				}
 			}
 		}
@@ -555,9 +555,9 @@
 			turn++;
 			$('#log').text(" ");
 			if (turn % 2===0){
-				$('#turn_icon').css("background-color","#ff0000").text("Red's Turn");
+				$('#turn_icon').css('color','white').text("White's Turn");
 			} else {
-				$('#turn_icon').css("background-color","#00ff00").text("Green's Turn");
+				$('#turn_icon').css('color','black').text("Black's Turn");
 			}
 		}
 	}
