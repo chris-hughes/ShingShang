@@ -44,5 +44,9 @@ io.sockets.on('connection', function (socket) {
     console.log(playerMove);
     socket.broadcast.emit('playerMove', playerMove);
   });
+  socket.on('playerEndTurn', function(endTurn){
+    console.log('endTurn');
+    socket.broadcast.emit('playerEndTurn', endTurn);
+  });
 
 });

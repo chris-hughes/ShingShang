@@ -122,7 +122,6 @@
 						$(new_square).data('coords').row,$(new_square).data('coords').col];
 
 					move(args[0],args[1],args[2],args[3],1);
-					// socket.emit('playerMove', args );
 
 				},
 			});
@@ -233,13 +232,11 @@
 	function legalMove(startx,starty,newx,newy,piece,movePiece){
 		// check if they're trying to move off the board
 		if (newx<0 || newx>9 || newy<0 || newy>9){
-			at(startx,starty).removeClass('selected');
 			render();
 			$('#log').text('Can not move piece off the board');
 			return false;
 		}
 		if ((newx<4 || newx>5) && (newy<1 || newy>8)){
-			at(startx,starty).removeClass('selected');
 			render();
 			$('#log').text('Can not move piece off the board');
 			return false;
@@ -247,13 +244,11 @@
 
 		// check if they're trying to make a spazzy move like a knight or something
 		if (Math.abs(newx-startx)>2 || Math.abs(newy-starty)>2){
-			at(startx,starty).removeClass('selected');
 			render();
 			$('#log').text(piece.type+'s do not move like that');
 			return false;
 		}
 		else if (!(Math.abs(newx-startx)+Math.abs(newy-starty)===1 || Math.abs(newx-startx)+Math.abs(newy-starty)===2 || Math.abs(newx-startx)+Math.abs(newy-starty)===4)) {
-			at(startx,starty).removeClass('selected');
 			render();
 			$('#log').text(piece.type+'s do not move like that');
 			return false;
@@ -280,18 +275,16 @@
 			}
 			else if (pieces[jumpPiece].colour===piece.colour){
 				$('#log').text('you jumped a friend');
-				// $('#endturn').show();
 				lastMoveJump=1;
 				lastPiece=movePiece;
 				return true;
 			}
 			else {
+				$('#log').text('you captured an enemey '+pieces[jumpPiece].type);
 				if (lastMoveJump===1){
 					$('#log').text('Shing-Shang bitch!');
 					shingShang=1;
 				}
-				$('#log').text('you captured an enemey '+pieces[jumpPiece].type);
-				// $('#endturn').show();
 				lastMoveJump=1;
 				if (jumpPiece<movePiece){
 					lastPiece=movePiece-1;
@@ -321,18 +314,16 @@
 			}
 			else if (pieces[jumpPiece].colour===piece.colour){
 				$('#log').text('you jumped a friend');
-				// $('#endturn').show();
 				lastMoveJump=1;
 				lastPiece=movePiece;
 				return true;
 			}
 			else {
+				$('#log').text('you captured an enemey '+pieces[jumpPiece].type);
 				if (lastMoveJump===1){
 					$('#log').text('Shing-Shang bitch!');
 					shingShang=1;
 				}
-				$('#log').text('you captured an enemey '+pieces[jumpPiece].type);
-				// $('#endturn').show();
 				lastMoveJump=1;
 				if (jumpPiece<movePiece){
 					lastPiece=movePiece-1;
@@ -348,7 +339,6 @@
 
 		else {
 			if (jumpPiece===-1 && lastMoveJump===1){
-				at(startx,starty).removeClass('selected');
 				render();
 				$('#log').text('you must jump again or end turn');
 				return;
@@ -357,25 +347,22 @@
 				return true;
 			}
 			else if (pieces[jumpPiece].heirarchy>piece.heirarchy){
-				at(startx,starty).removeClass('selected');
 				render();
 				$('#log').text(piece.type +'s can not jump '+pieces[jumpPiece].type+'s');
 				return false;
 			}
 			else if (pieces[jumpPiece].colour===piece.colour){
 				$('#log').text('you jumped a friend');
-				// $('#endturn').show();
 				lastMoveJump=1;
 				lastPiece=movePiece;
 				return true;
 			}
 			else {
+				$('#log').text('you captured an enemey '+pieces[jumpPiece].type);
 				if (lastMoveJump===1){
 					$('#log').text('Shing-Shang bitch!');
 					shingShang=1;
 				}
-				$('#log').text('you captured an enemey '+pieces[jumpPiece].type);
-				// $('#endturn').show();
 				lastMoveJump=1;
 				if (jumpPiece<movePiece){
 					lastPiece=movePiece-1;
@@ -415,12 +402,12 @@
 		}
 
 		if (whiteDragonCount===0){
-			$('#log').text('black wins!!! Sucks to be white');
+			$('#log').text('Black wins!!! Sucks to be White');
 			gameOver=1;
 			return;
 		}
 		else if (blackDragonCount===0){
-			$('#log').text('white wins!!! Sucks to be black');
+			$('#log').text('White wins!!! Sucks to be Black');
 			gameOver=2;
 			return;
 		}
@@ -465,11 +452,11 @@
 		else if (turn % 2===0 && pieces[movePiece].colour==="black"){
 			movePiece=-1; // this will stop the turn from happening
 			render();
-			$('#log').text("it is white's turn");
+			$('#log').text("it is White's turn");
 			return;
 		}
 		else if (turn % 2===1 && pieces[movePiece].colour==="white"){
-			$('#log').text("it is black's turn");
+			$('#log').text("it is Black's turn");
 			render();
 			movePiece=-1; // this will stop the turn from happening
 			return;
@@ -542,7 +529,12 @@
 		}
 	}
 
-	function end(){
+	function end(emit){
+
+		if (emit==1){
+			socket.emit('playerEndTurn', 1 );
+		}
+		
 		$('#endturn').hide();
 		if (shingShang===1){
 			$('#log').text(pieces[lastPiece].colour+' gets another turn');
