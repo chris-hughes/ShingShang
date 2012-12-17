@@ -6,9 +6,9 @@ Things to do
 
 ·         Some of the game logic needs attention
 				Make it so only dragons can land on target squares
-				Check what is getting logged is correct (ShingShang biatch isn't logging)
+				Check what is getting logged is correct
 
-·         Emit the move only when it is successful (ie. not when the other player is spazzing about)
+·         Only the correct player should be able to make a move (including endTurn)
 
 ·         Pair up the clients
 
