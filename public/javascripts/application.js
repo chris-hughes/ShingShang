@@ -99,15 +99,15 @@
 		});
 
 		if (gameOver===1){
-			$('#log').text('Game over - black won')
+			$('#log').text('Game over - Black won')
 		}
 		else if (gameOver===2){
-			$('#log').text('Game over - white won');	
+			$('#log').text('Game over - White won');	
 		}
 		else {
 
 			$('.piece').draggable({
-				'cursor': 'hand',
+				cursor: 'hand',
 				containment: ".board"
 			});
 
@@ -121,8 +121,8 @@
 					var args = [$(old_square).parent().data('coords').row,$(old_square).parent().data('coords').col,
 						$(new_square).data('coords').row,$(new_square).data('coords').col];
 
-					move(args[0],args[1],args[2],args[3]);
-					socket.emit('playerMove', args );
+					move(args[0],args[1],args[2],args[3],1);
+					// socket.emit('playerMove', args );
 
 				},
 			});
@@ -433,7 +433,7 @@
 	var shingShang=0;		// this will tell if there's been a shing shang
 	var gameOver=0;
 
-	function move(startx,starty,newx,newy){
+	function move(startx,starty,newx,newy,emit){
 
 		// check if the game is over
 		if (gameOver>0){
@@ -451,7 +451,6 @@
 
 		if (lastMoveJump===1){
 			if (lastPiece!==movePiece){
-				at(startx,starty).removeClass('selected');
 				render();
 				$('#log').text('must move the same piece or end turn')
 				return;
@@ -459,21 +458,18 @@
 		}
 
 		if (movePiece<0){
-			at(startx,starty).removeClass('selected');
 			render();
 			$('#log').text("No piece to move in starting cell");
 			return;
 		}
 		else if (turn % 2===0 && pieces[movePiece].colour==="black"){
 			movePiece=-1; // this will stop the turn from happening
-			at(startx,starty).removeClass('selected');
 			render();
 			$('#log').text("it is white's turn");
 			return;
 		}
 		else if (turn % 2===1 && pieces[movePiece].colour==="white"){
 			$('#log').text("it is black's turn");
-			at(startx,starty).removeClass('selected');
 			render();
 			movePiece=-1; // this will stop the turn from happening
 			return;
@@ -488,7 +484,6 @@
 			}
 		}
 		if (allowMove>-1){
-			at(startx,starty).removeClass('selected');
 			render();
 			$('#log').text("Piece already in target cell");
 			return;
@@ -516,6 +511,11 @@
 			}
 
 			render();
+
+			if (emit==1){
+				var args = [startx,starty,newx,newy,1];
+				socket.emit('playerMove', args );
+			}
 
 			// check for a winner
 			win();
@@ -564,12 +564,12 @@
 	}
 
 	function end_test(){
-		move(7,8,6,8);
-		move(2,8,4,8);
-		move(8,7,7,6);
-		move(1,7,2,7);
-		move(7,6,6,6);
-		move(0,6,1,5);
+		move(7,8,6,8,1);
+		move(2,8,4,8,1);
+		move(8,7,7,6,1);
+		move(1,7,2,7,1);
+		move(7,6,6,6,1);
+		move(0,6,1,5,1);
 	}
 
 	// make end a global function so it can be called outside the document.ready callback
