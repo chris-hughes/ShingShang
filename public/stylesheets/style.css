@@ -20,7 +20,15 @@ h1 {
 }
 
 a {
-  color: #00B7FF;
+  color: lightblue;
+}
+
+a:hover{
+	color:whitesmoke;
+}
+
+li {
+	color: lightblue;
 }
 
 /* board styles */

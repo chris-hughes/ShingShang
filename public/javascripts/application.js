@@ -565,8 +565,12 @@
 	}
 
 	// make end a global function so it can be called outside the document.ready callback
+	function link_test(){
+		alert('Yo!');
+	}
 	window.end = end;
 	window.move = move;
 	window.end_test = end_test;
+	window.link_test = link_test;
 
 });
