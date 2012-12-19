@@ -31,6 +31,7 @@ a {
 	padding-right: 20px;
 	padding-left: 20px;
 	width: 65%;
+	height: 440px;
 	float:left;
 }
 
@@ -89,6 +90,7 @@ a {
 .output{
 	float: left;
 	width: 25%;
+	height: 440px;
 }
 
 #turn_icon{
@@ -99,6 +101,16 @@ a {
 	color: white;
 }
 
+#endturndiv{
+	height: 2em;
+}
+
 #log{
 	padding-top: 20px;
+}
+
+/* chat */
+
+#chat {
+
 }
