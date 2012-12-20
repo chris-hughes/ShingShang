@@ -6,7 +6,7 @@ socket.on('gameConnect', function(player,gameChoice){
 });
 
 socket.on('gameFull', function(player, gameChoice){
-	$('#chat').append('<b>'+player + ':</b> ' + 'Sorry, '+ gameChoice + 'is full.<br>');
+	$('#chat').append('<b>'+player + ':</b> ' + 'Sorry, '+ gameChoice + ' is full.<br>');
 })
 
 // this needs to be fixed. Changing the text changes the name of the game which causes problems
@@ -19,8 +19,12 @@ socket.on('gameFull', function(player, gameChoice){
 // });
 
 // control of the game
-socket.on('playerMove', function (playerMove) {
-	move(playerMove[0],playerMove[1],playerMove[2],playerMove[3],0);
+socket.on('playerMove', function (player, playerMove) {
+	console.log(socket.id);
+	console.log(player);
+	if (socket.id != player){
+		move(playerMove[0],playerMove[1],playerMove[2],playerMove[3],0);
+	}
 });
 
 socket.on('playerEndTurn', function (endTurn) {

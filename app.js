@@ -79,12 +79,14 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('playerMove', function(playerMove){
     console.log(playerMove);
-    socket.broadcast.emit('playerMove', playerMove);
+    console.log(socket.id);
+    console.log(socket.room);
+    socket.broadcast.to(socket.room).emit('playerMove', socket.id, playerMove);
   });
 
   socket.on('playerEndTurn', function(endTurn){
     console.log('endTurn');
-    socket.broadcast.emit('playerEndTurn', endTurn);
+    socket.broadcast.to(socket.room).emit('playerEndTurn', endTurn);
   });
 
 });
