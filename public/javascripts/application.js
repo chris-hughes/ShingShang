@@ -555,6 +555,10 @@
 		}
 	}
 
+	function game_choice(link){
+		socket.emit('gameChoice', link.text);
+	}
+
 	function end_test(){
 		move(7,8,6,8,1);
 		move(2,8,4,8,1);
@@ -565,12 +569,10 @@
 	}
 
 	// make end a global function so it can be called outside the document.ready callback
-	function link_test(){
-		alert('Yo!');
-	}
+
 	window.end = end;
 	window.move = move;
 	window.end_test = end_test;
-	window.link_test = link_test;
+	window.game_choice = game_choice;
 
 });
