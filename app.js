@@ -40,7 +40,7 @@ app.listen(8888, function(){
 
 // Socket.io
 
-var games = ['Game 1'];
+var games = ['Game 1','Game 2','Game 3'];
 
 io.sockets.on('connection', function (socket) {
 

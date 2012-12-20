@@ -128,7 +128,7 @@
 		}
 	}
 
-	// render the initial board
+	// render the initial board - this is noe done through socket.io
 	// render();
 
 	// function to check if a piece was jumped
@@ -501,7 +501,7 @@
 
 			if (emit==1){
 				var args = [startx,starty,newx,newy,1];
-				socket.emit('playerMove', args );
+				socket.emit('playerMove', args , turn);
 			}
 
 			// check for a winner
