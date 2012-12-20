@@ -48,28 +48,33 @@ io.sockets.on('connection', function (socket) {
   socket.on('gameChoice', function(gameChoice){
 
     if (games.indexOf(gameChoice)>-1){
-
-      // add the player to the players object
-      players[socket.id] = socket.id; // this should be changed to username
-      // store the room name in the socket
-      socket.room = gameChoice;
-      // send the client to the room
-      socket.join(gameChoice);
-
       var gamePlayers = io.sockets.clients(gameChoice).length;
-      // tell the player they've connected to the game
-      io.sockets.in(gameChoice).emit('gameConnect', socket.id, gameChoice);
-      // update everyone the number of players in a game
-      io.sockets.emit('gameCount', gameChoice, gamePlayers);
+
+      if (gamePlayers<2){
+        players[socket.id] = socket.id; // this should be changed to username
+        socket.room = gameChoice;
+        socket.join(gameChoice);
+
+        // tell the player they've connected to the game
+        io.sockets.in(gameChoice).emit('gameConnect', socket.id, gameChoice);
+
+        // update everyone (not just people in the room) the number of players in a game
+        io.sockets.emit('gameCount', gameChoice, gamePlayers);
+      }
+      else {
+        socket.emit('gameFull', socket.id, gameChoice);
+      }
+
     }
 
     else {
-      console.log('Game does not exist');
+      console.log('Game does not exist');  // can fill this in to create new rooms
       // games.push(gameChoice);
       // players[socket.id] = socket.id; // this should be changed to username
       // socket.room = gameChoice;
       // socket.join(gameChoice);
     }
+
   });
 
   socket.on('playerMove', function(playerMove){

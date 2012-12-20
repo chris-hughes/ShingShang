@@ -5,6 +5,9 @@ socket.on('gameConnect', function(player,gameChoice){
 	$('#chat').append('<b>'+player + ':</b> ' + 'You have succesfully connected to '+ gameChoice + '<br>');
 });
 
+socket.on('gameFull', function(player, gameChoice){
+	$('#chat').append('<b>'+player + ':</b> ' + 'Sorry, '+ gameChoice + 'is full.<br>');
+})
 
 // this needs to be fixed. Changing the text changes the name of the game which causes problems
 // socket.on('gameCount', function(gameChoice, gamePlayers){
