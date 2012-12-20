@@ -58,6 +58,10 @@ io.sockets.on('connection', function (socket) {
         // tell the player they've connected to the game
         io.sockets.in(gameChoice).emit('gameConnect', socket.id, gameChoice);
 
+        if (gamePlayers+1==2){
+          io.sockets.in(gameChoice).emit('gameRender');
+        }
+
         // update everyone (not just people in the room) the number of players in a game
         io.sockets.emit('gameCount', gameChoice, gamePlayers);
       }

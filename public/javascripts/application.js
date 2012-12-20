@@ -129,7 +129,7 @@
 	}
 
 	// render the initial board
-	render();
+	// render();
 
 	// function to check if a piece was jumped
 	function jumped(startx,starty,newx,newy,piece){
@@ -571,6 +571,7 @@
 	// make end a global function so it can be called outside the document.ready callback
 
 	window.end = end;
+	window.render = render;
 	window.move = move;
 	window.end_test = end_test;
 	window.game_choice = game_choice;
