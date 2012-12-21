@@ -9,6 +9,9 @@ Things to do
 				Check what is getting logged is correct
 
 ·         Only the correct player should be able to make a move (including endTurn)
+				sort out endturn button
+				make it so you can only move your own colour
+				create message to wait for the other player to move
 
 ·         Pair up the clients
 

@@ -535,7 +535,11 @@
 				return;
 			}
 			else if (gameOver==0 && lastMoveJump==1){
-				$('#endturn').show();
+				if (turn % 2===0 && window.colour=='white')  {
+					$('#endturn').show();
+				} else if (turn % 2===1 && window.colour=='black')  {
+					$('#endturn').show();
+				}
 			}
 
 			// if no jump then end the turn
@@ -576,6 +580,7 @@
 			} else {
 				$('#turn_icon').css('color','black').text("Black's Turn");
 			}
+			render();
 		}
 	}
 
