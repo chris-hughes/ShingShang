@@ -7,8 +7,13 @@ socket.on('gameConnect', function(player,gameChoice,gamePlayers){
 		$('#log').text('Please went for another player to join');
 	} else {
 		render();
-		$('#log').text('Game on!');
+		$('#log').text('');
+		$('#log').append('Game on!<br> You are playing as '+window.colour);
 	}
+});
+
+socket.on('playerColour',function(colour){
+	window.colour=colour;
 });
 
 socket.on('gameFull', function(player, gameChoice){
@@ -25,7 +30,7 @@ socket.on('gameFull', function(player, gameChoice){
 // });
 
 // control of the game
-socket.on('playerMove', function (player, playerMove) {
+socket.on('playerMove', function (playerMove) {
 	move(playerMove[0],playerMove[1],playerMove[2],playerMove[3],0);
 });
 

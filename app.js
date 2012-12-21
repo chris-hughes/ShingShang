@@ -54,6 +54,13 @@ io.sockets.on('connection', function (socket) {
         socket.join(gameChoice);
         gamePlayers++;
 
+        if (gamePlayers==1){
+          socket.colour='white';
+        } else {
+          socket.colour='black';  
+        }
+        socket.emit('playerColour',socket.colour);
+
         // tell the player they've connected to the game
         io.sockets.in(gameChoice).emit('gameConnect', socket.id, gameChoice, gamePlayers);
 
@@ -80,7 +87,7 @@ io.sockets.on('connection', function (socket) {
     console.log(playerMove);
     console.log(socket.id);
     console.log(socket.room);
-    socket.broadcast.to(socket.room).emit('playerMove', socket.id, playerMove);
+    socket.broadcast.to(socket.room).emit('playerMove', playerMove);
   });
 
   socket.on('playerEndTurn', function(endTurn){

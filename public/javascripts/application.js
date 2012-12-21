@@ -87,6 +87,8 @@
 	}
 
 	var render = function(){
+		console.log('rendered');
+		console.log(turn);
 		clear();
 		for (i=0;i<pieces.length;i++){
 			draw(pieces[i].type, pieces[i].x ,pieces[i].y, pieces[i].colour);
@@ -104,7 +106,28 @@
 		else if (gameOver===2){
 			$('#log').text('Game over - White won');	
 		}
-		else {
+		else if (turn % 2===0 && window.colour=='white')  {
+
+			$('.piece').draggable({
+				cursor: 'hand',
+				containment: ".board"
+			});
+
+			$('.board .row div').droppable({
+				accept: '.piece',
+				hoverClass: 'hover',
+				drop: function(event, ui) {
+
+					var old_square = ui.draggable;
+					var new_square = this;
+					var args = [$(old_square).parent().data('coords').row,$(old_square).parent().data('coords').col,
+						$(new_square).data('coords').row,$(new_square).data('coords').col];
+
+					move(args[0],args[1],args[2],args[3],1);
+
+				},
+			});
+		} else if (turn % 2===1 && window.colour=='black')  {
 
 			$('.piece').draggable({
 				cursor: 'hand',
@@ -497,11 +520,11 @@
 				}
 			}
 
-			render();
+			
 
 			if (emit==1){
 				var args = [startx,starty,newx,newy,1];
-				socket.emit('playerMove', args , turn);
+				socket.emit('playerMove', args);
 			}
 
 			// check for a winner
@@ -526,6 +549,7 @@
 					$('#turn_icon').css('color','black').text("Black's Turn");
 				}
 			}
+			render();
 		}
 	}
 
