@@ -91,7 +91,6 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('playerEndTurn', function(endTurn){
-    console.log('endTurn');
     socket.broadcast.to(socket.room).emit('playerEndTurn', endTurn);
   });
 

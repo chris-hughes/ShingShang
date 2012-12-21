@@ -87,8 +87,6 @@
 	}
 
 	var render = function(){
-		console.log('rendered');
-		console.log(turn);
 		clear();
 		for (i=0;i<pieces.length;i++){
 			draw(pieces[i].type, pieces[i].x ,pieces[i].y, pieces[i].colour);
@@ -108,6 +106,8 @@
 		}
 		else if (turn % 2===0 && window.colour=='white')  {
 
+			$('#log').text('Your move');
+
 			$('.piece').draggable({
 				cursor: 'hand',
 				containment: ".board"
@@ -127,8 +127,12 @@
 
 				},
 			});
+		} else if (turn % 2===0 && window.colour=='black'){
+			$('#log').text('Waiting for white to move');
 		} else if (turn % 2===1 && window.colour=='black')  {
 
+			$('#log').text('Your move');
+
 			$('.piece').draggable({
 				cursor: 'hand',
 				containment: ".board"
@@ -148,6 +152,8 @@
 
 				},
 			});
+		} else if (turn % 2===1 && window.colour=='white'){
+			$('#log').text('Waiting for black to move');
 		}
 	}
 

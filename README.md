@@ -8,13 +8,6 @@ Things to do
 				Make it so only dragons can land on target squares
 				Check what is getting logged is correct
 
-·         Only the correct player should be able to make a move (including endTurn)
-				sort out endturn button
-				make it so you can only move your own colour
-				create message to wait for the other player to move
-
-·         Pair up the clients
-
 ·         Introduce nicknames and chat
 
 ·         Introduce basic AI (maybe use alphaBeta method https://github.com/davefowler/chess/)
